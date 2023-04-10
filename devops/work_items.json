@@ -1,0 +1,19 @@
+[
+    {
+      "type": "Product Backlog Item",
+      "title": "Example PBI 1",
+      "description": "An example PBI for the project.",
+      "area_path": "MyProject\\Product Team",
+      "iteration_path": "MyProject\\Iteration 1",
+      "custom_field": "example_value"
+    },
+    {
+      "type": "Bug",
+      "title": "Example Bug 1",
+      "description": "An example bug for the project.",
+      "area_path": "MyProject\\Development Team",
+      "iteration_path": "MyProject\\Iteration 1",
+      "custom_field": "example_value"
+    }
+  ]
+  
