@@ -1,38 +1,50 @@
-# Terraform example for Azure DevOps
+# Terraform DevOps Project
 
-This Terraform project provides an example of how to create an Azure DevOps project with various resources, including a wiki, dashboards, work items, repositories with branch policies, and build and release pipelines for an Angular app.
+This Terraform project provisions an Azure DevOps project with an Angular app repository, a build pipeline, and a release pipeline.
 
-## Requirements
+## Prerequisites
 
-To run this Terraform project, you'll need the following:
+Before running this Terraform project, make sure you have the following:
 
-- Terraform v0.15 or later
-- An Azure DevOps organization and project
-- An Azure service principal with permissions to create resources in your Azure DevOps project
+- An Azure DevOps organization URL
+- A personal access token (PAT) with the following scopes: Code (read and write), Packaging (read), and Agent Pools (read and manage)
+- An environment variable named `AZDO_PERSONAL_ACCESS_TOKEN` containing your PAT
 
 ## Usage
 
+To use this Terraform project, follow these steps:
+
 1. Clone this repository to your local machine.
-2. Update the `variables.tf` file with your Azure DevOps project and service principal information.
-3. Update the `work_items.json` file with the desired work items for your project.
-4. Run `terraform init` to initialize the Terraform workspace.
-5. Run `terraform plan` to preview the changes that Terraform will make to your Azure DevOps project.
-6. Run `terraform apply` to apply the changes to your Azure DevOps project.
+2. Change into the project directory.
+3. Run `terraform init -upgrade` to initialize the working directory and upgrade modules and plugins.
+4. Run `terraform plan -var="azdo_personal_access_token=$env:AZDO_PERSONAL_ACCESS_TOKEN"` to see the changes that Terraform will make to your infrastructure.
+5. If you are satisfied with the changes, run `terraform apply -auto-approve -var="azdo_personal_access_token=$env:AZDO_PERSONAL_ACCESS_TOKEN"` to apply the changes.
+6. If you need to approve the plan again, run `terraform plan approve -var="azdo_personal_access_token=$env:AZDO_PERSONAL_ACCESS_TOKEN"`.
+7. To destroy the infrastructure provisioned by this project, run `terraform destroy -auto-approve -var="azdo_personal_access_token=$env:AZDO_PERSONAL_ACCESS_TOKEN"`.
 
-## Project structure
+Note: Make sure to replace `$env:AZDO_PERSONAL_ACCESS_TOKEN` with the actual value of your Azure DevOps personal access token.
 
-This Terraform project is structured as follows:
+## Inputs
 
-- `main.tf`: Creates the Azure DevOps project and sets up access levels.
-- `wiki.tf`: Creates the wiki and adds some initial pages.
-- `dashboards.tf`: Creates some sample dashboards for the project.
-- `work_items.tf`: Creates work items based on the `work_items.json` file.
-- `repositories.tf`: Creates a repository for the Angular app and sets branch policies.
-- `build.tf`: Creates a build pipeline for the Angular app.
-- `release.tf`: Creates a release pipeline for the Angular app.
-- `variables.tf`: Defines the variables used in the Terraform code.
-- `work_items.json`: Defines the work items for the project.
+This Terraform project accepts the following input variables:
 
-## Conclusion
+- `azdo_organization_url`: The URL of the Azure DevOps organization where the project will be created. Defaults to `"https://dev.azure.com/CreadorProyectosOrg/"`.
+- `azdo_personal_access_token`: The Azure DevOps personal access token used to authenticate Terraform with the Azure DevOps API.
+- `project_name`: The name of the Azure DevOps project to create. Defaults to `"myproject"`.
+- `angular_app_repository_name`: The name of the Angular app repository to create in the Azure DevOps project. Defaults to `"myapp"`.
+- `project_id`: The ID of the Azure DevOps project to use for creating other resources. This should be set to the ID of the project created by this Terraform project. Defaults to `12345678-90ab-cdef-1234-567890abcdef`.
+- `build_pipeline_id`: The ID of the build pipeline to create. Defaults to `1234`.
 
-This Terraform project provides an example of how to create an Azure DevOps project with various resources, including a wiki, dashboards, work items, repositories with branch policies, and build and release pipelines for an Angular app. By following the instructions in this README file, you can easily set up your own Azure DevOps project using Terraform.
+## Outputs
+
+This Terraform project exports the following output variables:
+
+- `repos_output`: A map of the names and IDs of the Azure DevOps repositories created by this project.
+
+## Authors
+
+Ciprian Ilut (cilut@gmail.com)
+
+## License
+
+This Terraform project is released under the MIT License.
