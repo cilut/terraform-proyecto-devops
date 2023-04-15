@@ -1,0 +1,34 @@
+# Terraform files
+.terraform/
+
+# Local tfvars files
+*.auto.tfvars
+*.auto.tfvars.json
+
+# Ignore the .terraform.lock.hcl file when present
+.terraform.lock.hcl
+
+# Visual Studio Code files
+.vscode/
+
+# Ignore any local .terraformrc files
+.terraformrc
+
+# Ignore tfstate files
+*.tfstate
+*.tfstate.*
+
+# Ignore tfplan files
+*.tfplan
+
+# Visual Studio files
+*.suo
+*.user
+*.sln.docstates
+bin/
+obj/
+
+# Visual Studio Code files
+.vscode/
+*.code-workspace
+*.vscodeignore
