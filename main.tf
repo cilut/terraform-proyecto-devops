@@ -6,6 +6,9 @@ module "project"{
 
 
 module "repositories"{
+  depends_on = [
+    module.project
+  ]
   source = "./modules/repositories"
 
   # Pasa las variables requeridas por el módulo
@@ -15,7 +18,11 @@ module "repositories"{
   rp_organization_name = var.organization_name
 }
 
-module "build_pipelines" {
+module "build_pipelines" {  
+  depends_on = [
+    module.repositories
+  ]
+
   source = "./modules/pipelines/build"
 
   bp_build_pipelines = var.build_pipelines  
