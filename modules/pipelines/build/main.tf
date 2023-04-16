@@ -15,8 +15,8 @@ resource "azuredevops_build_definition" "example" {
   count = length(var.bp_build_pipelines)
 
   project_id = var.bp_project_id
-  name       = "Example Build Definition"
-  path       = "\\ExampleFolder"
+  name       = var.bp_build_pipelines[count.index].bp_name
+  path       = "\\${var.bp_build_pipelines[count.index].bp_path}"
 
   ci_trigger {
     use_yaml = false
@@ -38,7 +38,7 @@ resource "azuredevops_build_definition" "example" {
     repo_type   = "TfsGit"
     repo_id     = var.bp_repos_output[var.bp_build_pipelines[count.index].bp_repository_name]
     branch_name = "main"
-    yml_path    = "azure-pipelines.yml"
+    yml_path    = var.bp_build_pipelines[count.index].bp_fichero_yml
   }
 
   variable_groups = [

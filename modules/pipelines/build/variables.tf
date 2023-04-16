@@ -15,6 +15,8 @@ variable "bp_build_pipelines" {
   type = list(object({
     bp_name              = string
     bp_repository_name   = string
+    bp_path              = string
+    bp_fichero_yml       = string
   }))
 }
 

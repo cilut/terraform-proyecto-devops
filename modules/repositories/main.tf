@@ -7,23 +7,61 @@ resource "azuredevops_git_repository" "repos" {
     init_type = "Uninitialized"
   }
 }
-
-# resource "null_resource" "clone_repo" {
-#   provisioner "local-exec" {
-#     command = "git clone https://github.com/cilut/terraform-proyecto-devops"
-#   }
-# }
-
-resource "null_resource" "add_code" {
+## ------------------------------------------------------------------------------
+##                ELIMINAMOS REPOS SI EXITEN
+## ------------------------------------------------------------------------------
+resource "null_resource" "remove_temp" {
   
-  # provisioner "local-exec" {
-  #   command = "cd ./terraform-proyecto-devops"
-  # }
   provisioner "local-exec" {
-    command = "git remote set-url origin https://dev.azure.com/${var.rp_organization_name}/${var.rp_project_name}/_git/${var.repositories[0].rp_repository_name}"
-  }
-  provisioner "local-exec" {
-    command = "git push origin main"
+    interpreter = ["powershell", "-Command"]
+    command = "if (Test-Path 'temp') { Remove-Item 'temp' -Recurse -Force }"
   }
 }
 
+## ------------------------------------------------------------------------------
+##                SUBIMOS CODIGO DE TERRAFORM-PROYECTO-DEVOPS
+## ------------------------------------------------------------------------------
+resource "null_resource" "clone_repo_terraform_proyecto_devops" {
+  depends_on = [
+    null_resource.remove_temp
+  ]
+  provisioner "local-exec" {
+    command = "git clone https://github.com/cilut/terraform-proyecto-devops temp/terraform-proyecto-devops/"
+  }
+}
+
+resource "null_resource" "add_code_terraform_proyecto_devops" {
+  depends_on = [
+    null_resource.clone_repo_configuracion_azure
+  ]
+  provisioner "local-exec" {
+    interpreter = ["powershell", "-Command"]
+    command     = "cd ./temp/terraform-proyecto-devops; git remote set-url origin https://dev.azure.com/${var.rp_organization_name}/${var.rp_project_name}/_git/${var.repositories[0].rp_repository_name}; git push origin main"
+  }
+}
+
+
+## ------------------------------------------------------------------------------
+##                SUBIMOS CODIGO DE configuracion-azure
+## ------------------------------------------------------------------------------
+resource "null_resource" "clone_repo_configuracion_azure" {
+  
+  depends_on = [
+    null_resource.remove_temp
+  ]
+
+  provisioner "local-exec" {
+    command = "git clone https://github.com/cilut/configuracion-azure temp/configuracion-azure/"
+  }
+}
+
+
+resource "null_resource" "add_code_configuracion_azure" {
+  depends_on = [
+    null_resource.clone_repo_configuracion_azure
+  ]
+  provisioner "local-exec" {
+    interpreter = ["PowerShell", "-Command"]
+    command = "cd ./temp/configuracion-azure; git remote set-url origin https://dev.azure.com/${var.rp_organization_name}/${var.rp_project_name}/_git/${var.repositories[1].rp_repository_name}; git push origin main"
+  }
+}

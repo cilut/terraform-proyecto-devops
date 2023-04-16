@@ -1,7 +1,9 @@
+
 module "project"{
   source = "./modules/project"
 
   p_project_name = var.project_name
+  p_connection_service = var.connection_service
 }
 
 
