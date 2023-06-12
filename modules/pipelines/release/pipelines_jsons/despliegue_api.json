@@ -1,0 +1,312 @@
+{
+    "source":  2,
+    "revision":  3,
+    "description":  null,
+    "createdBy":  {
+
+                  },
+    "createdOn":  "2023-06-11T17:00:00.410Z",
+    "modifiedBy":  {
+
+                   },
+    "modifiedOn":  "2023-06-11T17:02:36.913Z",
+    "isDeleted":  false,
+    "variables":  {
+
+                  },
+    "variableGroups":  [
+
+                       ],
+    "environments":  [
+                         {
+                             "id":  null,
+                             "name":  "Despliegue",
+                             "rank":  1,
+                             "owner":  {
+
+                                       },
+                             "variables":  {
+
+                                           },
+                             "variableGroups":  [
+                                                    23
+                                                ],
+                             "preDeployApprovals":  {
+                                                        "approvals":  [
+                                                                          {
+                                                                              "rank":  1,
+                                                                              "isAutomated":  true,
+                                                                              "isNotificationOn":  false,
+                                                                              "id":  487
+                                                                          }
+                                                                      ],
+                                                        "approvalOptions":  {
+                                                                                "requiredApproverCount":  null,
+                                                                                "releaseCreatorCanBeApprover":  false,
+                                                                                "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped":  false,
+                                                                                "enforceIdentityRevalidation":  false,
+                                                                                "timeoutInMinutes":  0,
+                                                                                "executionOrder":  1
+                                                                            }
+                                                    },
+                             "deployStep":  {
+                                                "id":  488
+                                            },
+                             "postDeployApprovals":  {
+                                                         "approvals":  [
+                                                                           {
+                                                                               "rank":  1,
+                                                                               "isAutomated":  true,
+                                                                               "isNotificationOn":  false,
+                                                                               "id":  489
+                                                                           }
+                                                                       ],
+                                                         "approvalOptions":  {
+                                                                                 "requiredApproverCount":  null,
+                                                                                 "releaseCreatorCanBeApprover":  false,
+                                                                                 "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped":  false,
+                                                                                 "enforceIdentityRevalidation":  false,
+                                                                                 "timeoutInMinutes":  0,
+                                                                                 "executionOrder":  2
+                                                                             }
+                                                     },
+                             "deployPhases":  [
+                                                  {
+                                                      "deploymentInput":  {
+                                                                              "parallelExecution":  {
+                                                                                                        "parallelExecutionType":  0
+                                                                                                    },
+                                                                              "agentSpecification":  {
+                                                                                                         "identifier":  "windows-2022"
+                                                                                                     },
+                                                                              "skipArtifactsDownload":  false,
+                                                                              "artifactsDownloadInput":  {
+                                                                                                             "downloadInputs":  [
+
+                                                                                                                                ]
+                                                                                                         },
+                                                                              "queueId":  191,
+                                                                              "demands":  [
+
+                                                                                          ],
+                                                                              "enableAccessToken":  false,
+                                                                              "timeoutInMinutes":  0,
+                                                                              "jobCancelTimeoutInMinutes":  1,
+                                                                              "condition":  "succeeded()",
+                                                                              "overrideInputs":  {
+
+                                                                                                 }
+                                                                          },
+                                                      "rank":  1,
+                                                      "phaseType":  1,
+                                                      "name":  "Agent job",
+                                                      "refName":  null,
+                                                      "workflowTasks":  [
+                                                                            {
+                                                                                "environment":  {
+
+                                                                                                },
+                                                                                "taskId":  "497d490f-eea7-4f2b-ab94-48d9c1acdcb1",
+                                                                                "version":  "4.*",
+                                                                                "name":  "Azure App Service Deploy: dev-proyectotfm-api-app",
+                                                                                "refName":  "",
+                                                                                "enabled":  true,
+                                                                                "alwaysRun":  false,
+                                                                                "continueOnError":  false,
+                                                                                "timeoutInMinutes":  0,
+                                                                                "retryCountOnTaskFailure":  0,
+                                                                                "definitionType":  "task",
+                                                                                "overrideInputs":  {
+
+                                                                                                   },
+                                                                                "condition":  "succeeded()",
+                                                                                "inputs":  {
+                                                                                               "ConnectionType":  "AzureRM",
+                                                                                               "ConnectedServiceName":  "6cceea42-2dea-4849-9227-58894520c22e",
+                                                                                               "PublishProfilePath":  "$(System.DefaultWorkingDirectory)/**/*.pubxml",
+                                                                                               "PublishProfilePassword":  "",
+                                                                                               "WebAppKind":  "webAppLinux",
+                                                                                               "WebAppName":  "dev-proyectotfm-api-app",
+                                                                                               "DeployToSlotOrASEFlag":  "false",
+                                                                                               "ResourceGroupName":  "",
+                                                                                               "SlotName":  "production",
+                                                                                               "DockerNamespace":  "",
+                                                                                               "DockerRepository":  "",
+                                                                                               "DockerImageTag":  "",
+                                                                                               "VirtualApplication":  "",
+                                                                                               "Package":  "$(System.DefaultWorkingDirectory)/_RadarCovidServer/javacode/s/dpppt-backend-sdk/dpppt-backend-sdk-ws/target/dpppt-backend-sdk-ws.jar",
+                                                                                               "RuntimeStack":  "",
+                                                                                               "RuntimeStackFunction":  "",
+                                                                                               "StartupCommand":  "",
+                                                                                               "ScriptType":  "",
+                                                                                               "InlineScript":  ":: You can provide your deployment commands here. One command per line.",
+                                                                                               "ScriptPath":  "",
+                                                                                               "WebConfigParameters":  "",
+                                                                                               "AppSettings":  "",
+                                                                                               "ConfigurationSettings":  "",
+                                                                                               "UseWebDeploy":  "false",
+                                                                                               "DeploymentType":  "webDeploy",
+                                                                                               "TakeAppOfflineFlag":  "true",
+                                                                                               "SetParametersFile":  "",
+                                                                                               "RemoveAdditionalFilesFlag":  "false",
+                                                                                               "ExcludeFilesFromAppDataFlag":  "true",
+                                                                                               "AdditionalArguments":  "-retryAttempts:6 -retryInterval:10000",
+                                                                                               "RenameFilesFlag":  "true",
+                                                                                               "XmlTransformation":  "false",
+                                                                                               "XmlVariableSubstitution":  "false",
+                                                                                               "JSONFiles":  ""
+                                                                                           }
+                                                                            }
+                                                                        ]
+                                                  }
+                                              ],
+                             "environmentOptions":  {
+                                                        "emailNotificationType":  "OnlyOnFailure",
+                                                        "emailRecipients":  "release.environment.owner;release.creator",
+                                                        "skipArtifactsDownload":  false,
+                                                        "timeoutInMinutes":  0,
+                                                        "enableAccessToken":  false,
+                                                        "publishDeploymentStatus":  true,
+                                                        "badgeEnabled":  false,
+                                                        "autoLinkWorkItems":  false,
+                                                        "pullRequestDeploymentEnabled":  false
+                                                    },
+                             "demands":  [
+
+                                         ],
+                             "conditions":  [
+                                                {
+                                                    "name":  "ReleaseStarted",
+                                                    "conditionType":  1,
+                                                    "value":  ""
+                                                }
+                                            ],
+                             "executionPolicy":  {
+                                                     "concurrencyCount":  1,
+                                                     "queueDepthCount":  0
+                                                 },
+                             "schedules":  [
+
+                                           ],
+                             "currentRelease":  {
+
+                                                },
+                             "retentionPolicy":  {
+                                                     "daysToKeep":  30,
+                                                     "releasesToKeep":  3,
+                                                     "retainBuild":  true
+                                                 },
+                             "processParameters":  {
+
+                                                   },
+                             "properties":  {
+                                                "BoardsEnvironmentType":  {
+                                                                              "$type":  "System.String",
+                                                                              "$value":  "unmapped"
+                                                                          },
+                                                "LinkBoardsWorkItems":  {
+                                                                            "$type":  "System.String",
+                                                                            "$value":  "False"
+                                                                        }
+                                            },
+                             "preDeploymentGates":  {
+                                                        "id":  0,
+                                                        "gatesOptions":  null,
+                                                        "gates":  [
+
+                                                                  ]
+                                                    },
+                             "postDeploymentGates":  {
+                                                         "id":  0,
+                                                         "gatesOptions":  null,
+                                                         "gates":  [
+
+                                                                   ]
+                                                     },
+                             "environmentTriggers":  [
+
+                                                     ],
+                             "badgeUrl":  null
+                         }
+                     ],
+    "artifacts":  [
+                      {
+                          "sourceId":  null,
+                          "type":  "Build",
+                          "alias":  "_RadarCovidServer",
+                          "definitionReference":  {
+                                                      "defaultVersionBranch":  {
+                                                                                   "id":  "",
+                                                                                   "name":  ""
+                                                                               },
+                                                      "defaultVersionSpecific":  {
+                                                                                     "id":  "",
+                                                                                     "name":  ""
+                                                                                 },
+                                                      "defaultVersionTags":  {
+                                                                                 "id":  "",
+                                                                                 "name":  ""
+                                                                             },
+                                                      "defaultVersionType":  {
+                                                                                 "id":  "latestType",
+                                                                                 "name":  "Latest"
+                                                                             },
+                                                      "definition":  {
+                                                                         "id":  62,
+                                                                         "name":  "RadarCovidServer"
+                                                                     },
+                                                      "definitions":  {
+                                                                          "id":  "",
+                                                                          "name":  ""
+                                                                      },
+                                                      "IsMultiDefinitionType":  {
+                                                                                    "id":  "False",
+                                                                                    "name":  "False"
+                                                                                },
+                                                      "project":  {
+                                                                      "id":  "99869344-7a54-4c44-8f63-9b51414392ce",
+                                                                      "name":  "ProyectoTFM"
+                                                                  },
+                                                      "repository":  {
+                                                                         "id":  "",
+                                                                         "name":  ""
+                                                                     },
+                                                      "artifactSourceDefinitionUrl":  {
+                                                                                          "id":  null,
+                                                                                          "name":  ""
+                                                                                      }
+                                                  },
+                          "isPrimary":  true,
+                          "isRetained":  false
+                      }
+                  ],
+    "triggers":  [
+
+                 ],
+    "releaseNameFormat":  "Release-$(rev:r)",
+    "tags":  [
+
+             ],
+    "properties":  {
+                       "DefinitionCreationSource":  {
+                                                        "$type":  "System.String",
+                                                        "$value":  "ReleaseNew"
+                                                    },
+                       "IntegrateBoardsWorkItems":  {
+                                                        "$type":  "System.String",
+                                                        "$value":  "False"
+                                                    },
+                       "IntegrateJiraWorkItems":  {
+                                                      "$type":  "System.String",
+                                                      "$value":  "false"
+                                                  }
+                   },
+    "id":  null,
+    "name":  "Api",
+    "path":  "\\",
+    "projectReference":  null,
+    "url":  null,
+    "_links":  {
+
+               }
+}

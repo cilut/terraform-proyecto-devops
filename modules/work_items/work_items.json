@@ -1,0 +1,9 @@
+[
+  {
+    "State": "New",
+    "type": "User Story",
+    "title": "Transition existing Azure environments to the Azure landing zone conceptual architecture",
+    "description": "https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/align-scenarios",
+    "path": "Desarrollo"
+  }
+]

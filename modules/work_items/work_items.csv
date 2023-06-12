@@ -1,0 +1,4 @@
+State,Work Item Type,Title,Description
+New,User Story,Example USER STORY 1,This is an example user story
+New,User Story,Transition existing Azure environments to the Azure landing zone conceptual architecture,https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/align-scenarios
+New,User Story,Review Azure AD UserPrincipalName population if planning to or using Azure AD Connect to ensure custom domain names are reflected in your on-premises Active Directory Domain Services environment.,https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/azure-ad-define

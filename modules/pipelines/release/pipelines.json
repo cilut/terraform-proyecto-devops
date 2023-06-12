@@ -1,0 +1,12 @@
+[
+    {
+        "pipeline_path": "/pipelines_jsons/p1.json",
+        "pipeline_name": "Despliegue infra",
+        "task_group_path": "/task_groups_jsons/tg1.json",
+        "task_group_id": ""
+    },
+    {
+        "pipeline_path": "/pipelines_jsons/despliegue_api.json",
+        "pipeline_name": "Despliegue API"
+    }
+]
