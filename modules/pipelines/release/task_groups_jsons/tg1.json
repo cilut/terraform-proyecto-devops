@@ -1,1 +1,363 @@
-{"tasks":[{"environment":{},"displayName":"Azure CLI ","alwaysRun":false,"continueOnError":false,"condition":"succeeded()","enabled":true,"timeoutInMinutes":0,"retryCountOnTaskFailure":0,"inputs":{"connectedServiceNameARM":"6cceea42-2dea-4849-9227-58894520c22e","scriptLocation":"inlineScript","scriptPath":"","inlineScript":"# this will create Azure resource group\ncall az group create --location $(location) --name $(terraformstoragerg)\n\ncall az storage account create --name $(terraformstorageaccount) --resource-group $(terraformstoragerg) --location $(location) --sku $(sku)\n\ncall az storage container create --name $(terrraformcontainer)\n\ncall az storage account keys list -g $(terraformstoragerg) -n $(terraformstorageaccount)\n\n","args":"","addSpnToEnvironment":"false","useGlobalConfig":"false","cwd":"","failOnStandardError":"false"},"task":{"id":"46e4be58-730b-4389-8a2f-ea10b3e5e815","versionSpec":"1.*","definitionType":"task"}},{"environment":{},"displayName":"Azure PowerShell script: InlineScript","alwaysRun":false,"continueOnError":false,"condition":"succeeded()","enabled":true,"timeoutInMinutes":0,"retryCountOnTaskFailure":0,"inputs":{"ConnectedServiceNameSelector":"ConnectedServiceNameARM","ConnectedServiceName":"","ConnectedServiceNameARM":"6cceea42-2dea-4849-9227-58894520c22e","ScriptType":"InlineScript","ScriptPath":"","Inline":"# Using this script we will fetch storage key which is required in terraform file to authenticate backend storage account\n\n$key=(Get-AzureRmStorageAccountKey -ResourceGroupName $(terraformstoragerg) -AccountName $(terraformstorageaccount)).Value[0]\n\nWrite-Host \"##vso[task.setvariable variable=storagekey]$key\"","ScriptArguments":"","errorActionPreference":"stop","FailOnStandardError":"false","TargetAzurePs":"LatestVersion","CustomTargetAzurePs":"","validateScriptSignature":"false"},"task":{"id":"72a1931b-effb-4d2e-8fd8-f8472a07cb62","versionSpec":"3.*","definitionType":"task"}},{"environment":{},"displayName":"Install Terraform latest","alwaysRun":false,"continueOnError":false,"condition":"succeeded()","enabled":true,"timeoutInMinutes":0,"retryCountOnTaskFailure":0,"inputs":{"terraformVersion":"latest"},"task":{"id":"a4789e5d-f6e8-431f-add9-379d640a883c","versionSpec":"1.*","definitionType":"task"}},{"environment":{},"displayName":"Terraform : init","alwaysRun":false,"continueOnError":false,"condition":"succeeded()","enabled":true,"timeoutInMinutes":0,"retryCountOnTaskFailure":0,"inputs":{"provider":"azurerm","command":"init","workingDirectory":"$(System.DefaultWorkingDirectory)/_terraform-infra","commandOptions":"","environmentServiceNameAzureRM":"","environmentServiceNameAWS":"","environmentServiceNameGCP":"","backendServiceArm":"6cceea42-2dea-4849-9227-58894520c22e","backendAzureRmResourceGroupName":"$(terraformstoragerg)","backendAzureRmStorageAccountName":"$(terraformstorageaccount)","backendAzureRmContainerName":"$(terrraformcontainer)","backendAzureRmKey":"terraform.tfstate","backendServiceAWS":"","backendAWSBucketName":"","backendAWSKey":"","backendServiceGCP":"","backendGCPBucketName":"","backendGCPPrefix":""},"task":{"id":"fe504acc-6115-40cb-89ff-191386b5e7bf","versionSpec":"2.*","definitionType":"task"}},{"environment":{},"displayName":"Terraform : plan","alwaysRun":false,"continueOnError":false,"condition":"succeeded()","enabled":true,"timeoutInMinutes":0,"retryCountOnTaskFailure":0,"inputs":{"provider":"azurerm","command":"plan","workingDirectory":"$(System.DefaultWorkingDirectory)/_terraform-infra","commandOptions":"","environmentServiceNameAzureRM":"6cceea42-2dea-4849-9227-58894520c22e","environmentServiceNameAWS":"","environmentServiceNameGCP":"","backendServiceArm":"","backendAzureRmResourceGroupName":"","backendAzureRmStorageAccountName":"","backendAzureRmContainerName":"","backendAzureRmKey":"","backendServiceAWS":"","backendAWSBucketName":"","backendAWSKey":"","backendServiceGCP":"","backendGCPBucketName":"","backendGCPPrefix":""},"task":{"id":"fe504acc-6115-40cb-89ff-191386b5e7bf","versionSpec":"2.*","definitionType":"task"}},{"environment":{},"displayName":"Terraform : apply -auto-approve","alwaysRun":false,"continueOnError":false,"condition":"succeeded()","enabled":true,"timeoutInMinutes":0,"retryCountOnTaskFailure":0,"inputs":{"provider":"azurerm","command":"apply","workingDirectory":"$(System.DefaultWorkingDirectory)/_terraform-infra","customCommand":"","commandOptions":"-auto-approve","outputTo":"console","outputFormat":"default","fileName":"","environmentServiceNameAzureRM":"6cceea42-2dea-4849-9227-58894520c22e","environmentServiceNameAWS":"","environmentServiceNameGCP":"","backendServiceArm":"","backendAzureRmResourceGroupName":"","backendAzureRmStorageAccountName":"","backendAzureRmContainerName":"","backendAzureRmKey":"","backendServiceAWS":"","backendAWSBucketName":"","backendAWSKey":"","backendServiceGCP":"","backendGCPBucketName":"","backendGCPPrefix":""},"task":{"id":"fe504acc-6115-40cb-89ff-191386b5e7bf","versionSpec":"4.*","definitionType":"task"}}],"runsOn":["Agent","DeploymentGroup"],"revision":6,"createdBy":{"displayName":"Ciprian Ilut Pop","id":"437419da-77f1-4a2b-84fd-2dcc4b3e752b","uniqueName":"cilut@fastex.es"},"createdOn":"2023-06-04T18:49:05.780Z","modifiedBy":{"displayName":"Ciprian Ilut Pop","id":"437419da-77f1-4a2b-84fd-2dcc4b3e752b","uniqueName":"cilut@fastex.es"},"modifiedOn":"2023-06-04T21:56:39.640Z","comment":"","id":"4c9dc2ea-8c25-4a2a-b11a-959a3c7e7f67","name":"Infra Deployment","version":{"major":1,"minor":0,"patch":0,"isTest":false},"iconUrl":"https://cdn.vsassets.io/v/M221_20230529.1/_content/icon-meta-task.png","friendlyName":"Infra Deployment","description":"","category":"Deploy","definitionType":"metaTask","author":"Ciprian Ilut Pop","demands":[],"groups":[],"inputs":[{"aliases":[],"options":{},"properties":{},"name":"location","label":"location","defaultValue":"$(location)","required":true,"type":"string","helpMarkDown":"","groupName":""},{"aliases":[],"options":{},"properties":{},"name":"sku","label":"sku","defaultValue":"$(sku)","required":true,"type":"string","helpMarkDown":"","groupName":""},{"aliases":[],"options":{},"properties":{},"name":"terraformstorageaccount","label":"terraformstorageaccount","defaultValue":"$(terraformstorageaccount)","required":true,"type":"string","helpMarkDown":"","groupName":""},{"aliases":[],"options":{},"properties":{},"name":"terraformstoragerg","label":"terraformstoragerg","defaultValue":"$(terraformstoragerg)","required":true,"type":"string","helpMarkDown":"","groupName":""},{"aliases":[],"options":{},"properties":{},"name":"terrraformcontainer","label":"terrraformcontainer","defaultValue":"$(terrraformcontainer)","required":true,"type":"string","helpMarkDown":"","groupName":""}],"satisfies":[],"sourceDefinitions":[],"dataSourceBindings":[],"instanceNameFormat":"Task group: Infra Deployment $(location)","preJobExecution":{},"execution":{},"postJobExecution":{},"_buildConfigMapping":{}}
+{
+    "tasks":  [
+                  {
+                      "environment":  {
+
+                                      },
+                      "displayName":  "Azure CLI ",
+                      "alwaysRun":  false,
+                      "continueOnError":  false,
+                      "condition":  "succeeded()",
+                      "enabled":  true,
+                      "timeoutInMinutes":  0,
+                      "retryCountOnTaskFailure":  0,
+                      "inputs":  {
+                                     "connectedServiceNameARM":  "dcff03cb-3a39-4574-ba76-b6a1e5b02d7f",
+                                     "scriptLocation":  "inlineScript",
+                                     "scriptPath":  "",
+                                     "inlineScript":  "# this will create Azure resource group\ncall az group create --location $(location) --name $(terraformstoragerg)\n\ncall az storage account create --name $(terraformstorageaccount) --resource-group $(terraformstoragerg) --location $(location) --sku $(sku)\n\ncall az storage container create --name $(terrraformcontainer)\n\ncall az storage account keys list -g $(terraformstoragerg) -n $(terraformstorageaccount)\n\n",
+                                     "args":  "",
+                                     "addSpnToEnvironment":  "false",
+                                     "useGlobalConfig":  "false",
+                                     "cwd":  "",
+                                     "failOnStandardError":  "false"
+                                 },
+                      "task":  {
+                                   "id":  "46e4be58-730b-4389-8a2f-ea10b3e5e815",
+                                   "versionSpec":  "1.*",
+                                   "definitionType":  "task"
+                               }
+                  },
+                  {
+                      "environment":  {
+
+                                      },
+                      "displayName":  "Azure PowerShell script: InlineScript",
+                      "alwaysRun":  false,
+                      "continueOnError":  false,
+                      "condition":  "succeeded()",
+                      "enabled":  true,
+                      "timeoutInMinutes":  0,
+                      "retryCountOnTaskFailure":  0,
+                      "inputs":  {
+                                     "ConnectedServiceNameSelector":  "ConnectedServiceNameARM",
+                                     "ConnectedServiceName":  "",
+                                     "ConnectedServiceNameARM":  "dcff03cb-3a39-4574-ba76-b6a1e5b02d7f",
+                                     "ScriptType":  "InlineScript",
+                                     "ScriptPath":  "",
+                                     "Inline":  "# Using this script we will fetch storage key which is required in terraform file to authenticate backend storage account\n\n$key=(Get-AzureRmStorageAccountKey -ResourceGroupName $(terraformstoragerg) -AccountName $(terraformstorageaccount)).Value[0]\n\nWrite-Host \"##vso[task.setvariable variable=storagekey]$key\"",
+                                     "ScriptArguments":  "",
+                                     "errorActionPreference":  "stop",
+                                     "FailOnStandardError":  "false",
+                                     "TargetAzurePs":  "LatestVersion",
+                                     "CustomTargetAzurePs":  "",
+                                     "validateScriptSignature":  "false"
+                                 },
+                      "task":  {
+                                   "id":  "72a1931b-effb-4d2e-8fd8-f8472a07cb62",
+                                   "versionSpec":  "3.*",
+                                   "definitionType":  "task"
+                               }
+                  },
+                  {
+                      "environment":  {
+
+                                      },
+                      "displayName":  "Install Terraform latest",
+                      "alwaysRun":  false,
+                      "continueOnError":  false,
+                      "condition":  "succeeded()",
+                      "enabled":  true,
+                      "timeoutInMinutes":  0,
+                      "retryCountOnTaskFailure":  0,
+                      "inputs":  {
+                                     "terraformVersion":  "latest"
+                                 },
+                      "task":  {
+                                   "id":  "a4789e5d-f6e8-431f-add9-379d640a883c",
+                                   "versionSpec":  "1.*",
+                                   "definitionType":  "task"
+                               }
+                  },
+                  {
+                      "environment":  {
+
+                                      },
+                      "displayName":  "Terraform : init",
+                      "alwaysRun":  false,
+                      "continueOnError":  false,
+                      "condition":  "succeeded()",
+                      "enabled":  true,
+                      "timeoutInMinutes":  0,
+                      "retryCountOnTaskFailure":  0,
+                      "inputs":  {
+                                     "provider":  "azurerm",
+                                     "command":  "init",
+                                     "workingDirectory":  "$(System.DefaultWorkingDirectory)/_terraform-infra",
+                                     "commandOptions":  "",
+                                     "environmentServiceNameAzureRM":  "dcff03cb-3a39-4574-ba76-b6a1e5b02d7f",
+                                     "environmentServiceNameAWS":  "",
+                                     "environmentServiceNameGCP":  "",
+                                     "backendServiceArm":  "dcff03cb-3a39-4574-ba76-b6a1e5b02d7f",
+                                     "backendAzureRmResourceGroupName":  "$(terraformstoragerg)",
+                                     "backendAzureRmStorageAccountName":  "$(terraformstorageaccount)",
+                                     "backendAzureRmContainerName":  "$(terrraformcontainer)",
+                                     "backendAzureRmKey":  "terraform.tfstate",
+                                     "backendServiceAWS":  "",
+                                     "backendAWSBucketName":  "",
+                                     "backendAWSKey":  "",
+                                     "backendServiceGCP":  "",
+                                     "backendGCPBucketName":  "",
+                                     "backendGCPPrefix":  ""
+                                 },
+                      "task":  {
+                                   "id":  "fe504acc-6115-40cb-89ff-191386b5e7bf",
+                                   "versionSpec":  "2.*",
+                                   "definitionType":  "task"
+                               }
+                  },
+                  {
+                      "environment":  {
+
+                                      },
+                      "displayName":  "Terraform : plan",
+                      "alwaysRun":  false,
+                      "continueOnError":  false,
+                      "condition":  "succeeded()",
+                      "enabled":  true,
+                      "timeoutInMinutes":  0,
+                      "retryCountOnTaskFailure":  0,
+                      "inputs":  {
+                                     "provider":  "azurerm",
+                                     "command":  "plan",
+                                     "workingDirectory":  "$(System.DefaultWorkingDirectory)/_terraform-infra",
+                                     "commandOptions":  "-var-file=\"$(env)_private.tfvars\"",
+                                     "environmentServiceNameAzureRM":  "dcff03cb-3a39-4574-ba76-b6a1e5b02d7f",
+                                     "environmentServiceNameAWS":  "",
+                                     "environmentServiceNameGCP":  "",
+                                     "backendServiceArm":  "dcff03cb-3a39-4574-ba76-b6a1e5b02d7f",
+                                     "backendAzureRmResourceGroupName":  "",
+                                     "backendAzureRmStorageAccountName":  "",
+                                     "backendAzureRmContainerName":  "",
+                                     "backendAzureRmKey":  "",
+                                     "backendServiceAWS":  "",
+                                     "backendAWSBucketName":  "",
+                                     "backendAWSKey":  "",
+                                     "backendServiceGCP":  "",
+                                     "backendGCPBucketName":  "",
+                                     "backendGCPPrefix":  ""
+                                 },
+                      "task":  {
+                                   "id":  "fe504acc-6115-40cb-89ff-191386b5e7bf",
+                                   "versionSpec":  "2.*",
+                                   "definitionType":  "task"
+                               }
+                  },
+                  {
+                      "environment":  {
+
+                                      },
+                      "displayName":  "Terraform : apply -auto-approve",
+                      "alwaysRun":  false,
+                      "continueOnError":  false,
+                      "condition":  "succeeded()",
+                      "enabled":  true,
+                      "timeoutInMinutes":  0,
+                      "retryCountOnTaskFailure":  0,
+                      "inputs":  {
+                                     "provider":  "azurerm",
+                                     "command":  "apply",
+                                     "workingDirectory":  "$(System.DefaultWorkingDirectory)/_terraform-infra",
+                                     "customCommand":  "",
+                                     "commandOptions":  "-auto-approve -var-file=\"$(env)_private.tfvars\"",
+                                     "outputTo":  "console",
+                                     "outputFormat":  "default",
+                                     "fileName":  "",
+                                     "environmentServiceNameAzureRM":  "dcff03cb-3a39-4574-ba76-b6a1e5b02d7f",
+                                     "environmentServiceNameAWS":  "",
+                                     "environmentServiceNameGCP":  "",
+                                     "backendServiceArm":  "dcff03cb-3a39-4574-ba76-b6a1e5b02d7f",
+                                     "backendAzureRmResourceGroupName":  "",
+                                     "backendAzureRmStorageAccountName":  "",
+                                     "backendAzureRmContainerName":  "",
+                                     "backendAzureRmKey":  "",
+                                     "backendServiceAWS":  "",
+                                     "backendAWSBucketName":  "",
+                                     "backendAWSKey":  "",
+                                     "backendServiceGCP":  "",
+                                     "backendGCPBucketName":  "",
+                                     "backendGCPPrefix":  ""
+                                 },
+                      "task":  {
+                                   "id":  "fe504acc-6115-40cb-89ff-191386b5e7bf",
+                                   "versionSpec":  "4.*",
+                                   "definitionType":  "task"
+                               }
+                  }
+              ],
+    "runsOn":  [
+                   "Agent",
+                   "DeploymentGroup"
+               ],
+    "revision":  2,
+    "createdBy":  {
+
+                  },
+    "createdOn":  "2023-06-16T09:11:00.063Z",
+    "modifiedBy":  {
+
+                   },
+    "modifiedOn":  "2023-06-16T09:13:51.780Z",
+    "comment":  "",
+    "id":  null,
+    "name":  "Infra Deployment",
+    "version":  {
+                    "major":  1,
+                    "minor":  0,
+                    "patch":  0,
+                    "isTest":  false
+                },
+    "iconUrl":  "https://cdn.vsassets.io/v/M221_20230529.1/_content/icon-meta-task.png",
+    "friendlyName":  "Infra Deployment",
+    "description":  "",
+    "category":  "Deploy",
+    "definitionType":  "metaTask",
+    "demands":  [
+
+                ],
+    "groups":  [
+
+               ],
+    "inputs":  [
+                   {
+                       "aliases":  [
+
+                                   ],
+                       "options":  {
+
+                                   },
+                       "properties":  {
+
+                                      },
+                       "name":  "env",
+                       "label":  "env",
+                       "defaultValue":  "$(env)",
+                       "required":  true,
+                       "type":  "string",
+                       "helpMarkDown":  "",
+                       "groupName":  ""
+                   },
+                   {
+                       "aliases":  [
+
+                                   ],
+                       "options":  {
+
+                                   },
+                       "properties":  {
+
+                                      },
+                       "name":  "location",
+                       "label":  "location",
+                       "defaultValue":  "$(location)",
+                       "required":  true,
+                       "type":  "string",
+                       "helpMarkDown":  "",
+                       "groupName":  ""
+                   },
+                   {
+                       "aliases":  [
+
+                                   ],
+                       "options":  {
+
+                                   },
+                       "properties":  {
+
+                                      },
+                       "name":  "sku",
+                       "label":  "sku",
+                       "defaultValue":  "$(sku)",
+                       "required":  true,
+                       "type":  "string",
+                       "helpMarkDown":  "",
+                       "groupName":  ""
+                   },
+                   {
+                       "aliases":  [
+
+                                   ],
+                       "options":  {
+
+                                   },
+                       "properties":  {
+
+                                      },
+                       "name":  "terraformstorageaccount",
+                       "label":  "terraformstorageaccount",
+                       "defaultValue":  "$(terraformstorageaccount)",
+                       "required":  true,
+                       "type":  "string",
+                       "helpMarkDown":  "",
+                       "groupName":  ""
+                   },
+                   {
+                       "aliases":  [
+
+                                   ],
+                       "options":  {
+
+                                   },
+                       "properties":  {
+
+                                      },
+                       "name":  "terraformstoragerg",
+                       "label":  "terraformstoragerg",
+                       "defaultValue":  "$(terraformstoragerg)",
+                       "required":  true,
+                       "type":  "string",
+                       "helpMarkDown":  "",
+                       "groupName":  ""
+                   },
+                   {
+                       "aliases":  [
+
+                                   ],
+                       "options":  {
+
+                                   },
+                       "properties":  {
+
+                                      },
+                       "name":  "terrraformcontainer",
+                       "label":  "terrraformcontainer",
+                       "defaultValue":  "$(terrraformcontainer)",
+                       "required":  true,
+                       "type":  "string",
+                       "helpMarkDown":  "",
+                       "groupName":  ""
+                   }
+               ],
+    "satisfies":  [
+
+                  ],
+    "sourceDefinitions":  [
+
+                          ],
+    "dataSourceBindings":  [
+
+                           ],
+    "instanceNameFormat":  "Task group: Infra Deployment $(env)",
+    "preJobExecution":  {
+
+                        },
+    "execution":  {
+
+                  },
+    "postJobExecution":  {
+
+                         },
+    "_buildConfigMapping":  {
+
+                            }
+}

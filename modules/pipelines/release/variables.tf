@@ -12,11 +12,17 @@ variable "project_id" {
   type = string
 }
 
+variable "sc_id" {
+  type = string
+}
+
+
 variable "release_pipeline_variables" {
   type = map(string)
   default = {
     repo_infra_name = ""
     repo_api_name   = ""
+    pipeline_name   = ""
   }
 }
 

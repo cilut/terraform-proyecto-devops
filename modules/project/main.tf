@@ -31,6 +31,12 @@ resource "azuredevops_team" "teams" {
   ]
 
 }
+# Create an application
+resource "azuread_application" "example" {
+  display_name = "ExampleApp"
+}
+
+
 
 
 resource "azuredevops_serviceendpoint_azurerm" "service_connection" {
@@ -48,6 +54,12 @@ resource "azuredevops_serviceendpoint_azurerm" "service_connection" {
   azurerm_subscription_id   = var.p_connection_service[count.index].p_azurerm_subscription_id
   azurerm_subscription_name = var.p_connection_service[count.index].p_azurerm_subscription_name
 
+}
+
+resource "azuredevops_resource_authorization" "example" {
+  project_id  = azuredevops_project.project.id
+  resource_id = azuredevops_serviceendpoint_azurerm.service_connection[0].id
+  authorized  = true
 }
 
 
@@ -99,7 +111,7 @@ resource "null_resource" "create_area_path" {
     command     = <<-EOT
       az boards area project delete --path '\${var.general.project_name}\Area\${each.value.name}' --project '${var.general.project_name}' --yes
       
-      az boards area project create --name '${each.value.name}' --path '\${var.general.project_name}\Area\' --project '${var.general.project_name}' 
+      az boards area project create --name '${each.value.name}' --organization 'https://dev.azure.com/${var.general.organization_name}/'--path '\${var.general.project_name}\Area\' --project '${var.general.project_name}' 
       
     EOT
   }
@@ -114,7 +126,7 @@ resource "null_resource" "associate_area_path" {
   provisioner "local-exec" {
     interpreter = ["PowerShell", "-Command"]
     command     = <<-EOT
-      az boards area team add --team '${each.value.name}' --path '\${var.general.project_name}\${each.value.name}' --set-as-default --include-sub-areas true --project ${azuredevops_project.project.id}
+      az boards area team add --team '${each.value.name}' --organization 'https://dev.azure.com/${var.general.organization_name}/' --path '\${var.general.project_name}\${each.value.name}' --set-as-default --include-sub-areas true --project ${azuredevops_project.project.id}
     EOT
   }
   # triggers = {
@@ -134,7 +146,7 @@ resource "null_resource" "associate_iteration_path" {
   provisioner "local-exec" {
     interpreter = ["PowerShell", "-Command"]
     command     = <<-EOT
-      az boards iteration team set-backlog-iteration --id ${data.azuredevops_iteration.iteration.id} --team '${each.value.name}' --project ${azuredevops_project.project.id}
+      az boards iteration team set-backlog-iteration --id ${data.azuredevops_iteration.iteration.id} --organization 'https://dev.azure.com/${var.general.organization_name}/' --team '${each.value.name}' --project ${azuredevops_project.project.id}
     EOT
   }
   #   triggers = {
@@ -151,7 +163,7 @@ resource "null_resource" "associate_iteration_path_1" {
       $childrenJson = '${jsonencode(data.azuredevops_iteration.iteration.children)}'
       $children = $childrenJson | ConvertFrom-Json
       foreach ($child in $children) {
-        az boards iteration team add --id $child.id --team '${each.value.name}' --project ${azuredevops_project.project.id}
+        az boards iteration team add --id $child.id --team '${each.value.name}' --organization 'https://dev.azure.com/${var.general.organization_name}/' --project ${azuredevops_project.project.id}
       }
     EOT
   }

@@ -62,6 +62,12 @@ build_pipelines = [
     bp_repository_name = "terraform-infra"
     bp_path            = "terraform-infra"
     bp_fichero_yml     = "TerraformDestroy.yml"
+  },
+  {
+    bp_name            = "Build API"
+    bp_repository_name = "radar-covid-api"
+    bp_path            = "radar-covid-api"
+    bp_fichero_yml     = "azure-pipelines.yml"
   }
 ]
 

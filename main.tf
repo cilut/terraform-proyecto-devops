@@ -43,7 +43,7 @@ module "build_pipelines" {
 
 module "release_pipelines" {
   depends_on = [
-    module.repositories
+    module.repositories, module.project
   ]
 
   source = "./modules/pipelines/release"
@@ -52,6 +52,7 @@ module "release_pipelines" {
   release_pipeline_variables        = var.release_pipeline_variables
   project_id                        = module.project.p_project_id
   release_pipeline_variables_groups = var.release_pipeline_variables_groups
+  sc_id                             = module.project.sc_id
 }
 
 # module "build_pipelines" {  

@@ -21,7 +21,7 @@ resource "null_resource" "import_work_items" {
 
     interpreter = ["PowerShell", "-Command"]
     command     = <<-EOT
-      az boards work-item create --title "${each.value.title}" --type "${each.value.type}" --description "${each.value.description}" --project "${var.general.project_name}" --area "${var.general.project_name}\\${each.value.path}" 
+      az boards work-item create --title "${each.value.title}" --organization 'https://dev.azure.com/${var.general.organization_name}/' --type "${each.value.type}" --description "${each.value.description}" --project "${var.general.project_name}" --area "${var.general.project_name}\\${each.value.path}" 
     EOT
   }
   triggers = {
