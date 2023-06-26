@@ -1,7 +1,6 @@
 
 resource "azuredevops_project" "project" {
 
-  #name               = var.p_project_name
   name               = var.general.project_name
   description        = "This is an example project"
   visibility         = "private"
@@ -31,13 +30,33 @@ resource "azuredevops_team" "teams" {
   ]
 
 }
+
 # Create an application
-resource "azuread_application" "example" {
+resource "azuread_application" "application" {
   display_name = "ExampleApp"
 }
 
+resource "azuread_application_password" "app_secret" {
+  application_object_id = azuread_application.application.object_id
 
+}
 
+data "azurerm_subscription" "primary" {
+}
+
+# data "azurerm_client_config" "example" {
+# }
+
+resource "azuread_service_principal" "service_principal" {
+  application_id               = azuread_application.application.application_id
+  app_role_assignment_required = false
+}
+
+resource "azurerm_role_assignment" "example" {
+  scope                = data.azurerm_subscription.primary.id
+  role_definition_name = "Contributor"
+  principal_id         = azuread_service_principal.service_principal.object_id
+}
 
 resource "azuredevops_serviceendpoint_azurerm" "service_connection" {
   count = length(var.p_connection_service)
@@ -47,8 +66,8 @@ resource "azuredevops_serviceendpoint_azurerm" "service_connection" {
   service_endpoint_name = var.p_connection_service[count.index].p_service_endpoint_name
   description           = var.p_connection_service[count.index].p_description
   credentials {
-    serviceprincipalid  = var.p_connection_service[count.index].p_serviceprincipalid
-    serviceprincipalkey = var.p_connection_service[count.index].p_serviceprincipalkey
+    serviceprincipalid  = azuread_application.application.application_id
+    serviceprincipalkey = azuread_application_password.app_secret.value
   }
   azurerm_spn_tenantid      = var.p_connection_service[count.index].p_azurerm_spn_tenantid
   azurerm_subscription_id   = var.p_connection_service[count.index].p_azurerm_subscription_id
@@ -70,22 +89,6 @@ variable "area_path" {
   }
 }
 
-# # Create the Area Path using Azure DevOps REST API
-# resource "null_resource" "create_area_path" {
-#   depends_on = [azuredevops_project.project, azuredevops_team.teams]
-#   for_each   = { for team in var.teams : team.name => team }
-
-#   provisioner "local-exec" {
-#     interpreter = ["PowerShell", "-Command"]
-#     command     = <<-EOT
-#       Invoke-WebRequest -Uri "https://dev.azure.com/${var.p_organization_name}/${var.p_project_name}/_apis/wit/classificationnodes/areas?api-version=6.0" `
-#       -Method Post `
-#       -ContentType "application/json" `
-#       -Headers @{Authorization=("Basic {0}" -f [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f "", "${var.p_azdo_personal_access_token}"))))} `
-#       -Body ('{"name": "${each.value.name}"}') `
-#     EOT
-#   }
-# }
 
 resource "null_resource" "install_devops_extention" {
   depends_on = [azuredevops_project.project, azuredevops_team.teams]
@@ -109,7 +112,7 @@ resource "null_resource" "create_area_path" {
 
     interpreter = ["PowerShell", "-Command"]
     command     = <<-EOT
-      az boards area project delete --path '\${var.general.project_name}\Area\${each.value.name}' --project '${var.general.project_name}' --yes
+      #az boards area project delete --path '\${var.general.project_name}\Area\${each.value.name}' --project '${var.general.project_name}' --yes
       
       az boards area project create --name '${each.value.name}' --organization 'https://dev.azure.com/${var.general.organization_name}/'--path '\${var.general.project_name}\Area\' --project '${var.general.project_name}' 
       

@@ -500,7 +500,7 @@
                                                   }
                    },
     "id":  null,
-    "name":  "Release pipeline",
+    "name":  "Despliegue de Infraestructura",
     "path":  "\\",
     "projectReference":  null,
     "url":  null,

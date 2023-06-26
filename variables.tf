@@ -26,8 +26,6 @@ variable "connection_service" {
   type = list(object({
     p_service_endpoint_name     = string
     p_description               = string
-    p_serviceprincipalid        = string
-    p_serviceprincipalkey       = string
     p_azurerm_spn_tenantid      = string
     p_azurerm_subscription_id   = string
     p_azurerm_subscription_name = string
@@ -35,8 +33,6 @@ variable "connection_service" {
   }))
   sensitive = true
 }
-
-
 
 variable "repositories" {
   type = list(object({
@@ -69,9 +65,6 @@ variable "teams" {
   }))
 }
 
-variable "general_info" {
-  type = map(any)
-}
 
 variable "release_pipeline_variables" {
   type = map(any)

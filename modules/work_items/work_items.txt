@@ -1,0 +1,360 @@
+[
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Transition existing Azure environments to the Azure landing zone conceptual architecture",
+      "description": "https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/align-scenarios",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Review Azure AD UserPrincipalName population if planning to or using Azure AD Connect to ensure custom domain names are reflected in you on-premises Active Directory Domain Services environment.",
+      "description": "https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/azure-ad-define",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Manage emergency access accounts in Azure AD",
+      "description": "https://docs.microsoft.com/en-us/azure/active-directory/roles/security-emergency-access",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Understand scope for Azure RBAC",
+      "description": "https://docs.microsoft.com/en-us/azure/role-based-access-control/scope-overview",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Azure AD activity logs in Azure Monitor",
+      "description": "https://docs.microsoft.com/en-us/azure/active-directory/reports-monitoring/concept-activity-logs-azure-monitor",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Virtual WAN network topology",
+      "description": "https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/virtual-wan-network-topology",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Connectivity to Azure",
+      "description": "https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/connectivity-to-azure",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "About zone-redundant virtual network gateways in Azure Availability Zones",
+      "description": "https://docs.microsoft.com/en-us/azure/vpn-gateway/about-zone-redundant-vnet-gateways",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Limit cross-tenant private endpoint connections in Azure",
+      "description": "https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/limit-cross-tenant-private-endpoint-connections",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Management Group and Subscription organization",
+      "description": "https://docs.microsoft.com/en-gb/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Resource Group organization",
+      "description": "https://docs.microsoft.com/en-gb/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Azure governance",
+      "description": "https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/governance",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "How to optimize your cloud investment with Cost Management",
+      "description": "https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/cost-mgt-best-practices?bc=/azure/cloud-adoption-framework/_bread/toc.json",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Business continuity and disaster recovery",
+      "description": "https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/management-business-continuity-disaster-recovery",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Operational compliance considerations",
+      "description": "https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/management-operational-compliance",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Inventory and visibility considerations",
+      "description": "https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/management-platform",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Meet your security requirements",
+      "description": "https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/security",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Service enablement framework",
+      "description": "https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/service-enablement-framework",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Create Azure Tenant",
+      "description": "Create Azure Tenant",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Create Users",
+      "description": "Create Users",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Comprar dominio fastex.es",
+      "description": "<div>Para comprarlo he creado una nueva cuenta auxiliar: soporte_dev@fastexx.onmicrosoft.com teneis la contraseña en el teams de desarrollo. Gracias a una promo que he encontrado ha costado 3 euro el primer año. </div>",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Crear repositorio de infraestructura - Terraform ",
+      "description": "<div>Con terraform podemos tener la infra estructura como código para hacerla más fácil manejable </div>",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Mirar la certificación de AZ900",
+      "description": "<div>Es para que tengáis una idea de que es Azure, podéis mirarla todos pero en especial Quico </div>",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Crear pipelines de build y despliegue de Web",
+      "description": "Crear pipelines de build y despliegue de Web",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Puesta en marcha de APP",
+      "description": "Puesta en marcha de APP",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Crear pipelines de despliegue de Terraform ",
+      "description": "Crear pipelines de despliegue de Terraform ",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Crear documento de arquitectura de aplicación ",
+      "description": "https://docs.microsoft.com/en-us/azure/architecture/guide/startups/startup-architecture",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Tutorial",
+      "description": "https://www.youtube.com/watch?v=YcJ9IeukJL8",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Definición de arquitectura",
+      "description": "Definición de arquitectura",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Creación de plantilla de recurso",
+      "description": "<div>Añadir recurso de SQL Server a terraform </div><div>Añadir recurso base de datos terrafomr </div><div><br> </div>",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Preacuerdo fundación empresa",
+      "description": "Preacuerdo fundación empresa",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Configurar dominio en la organización de Azure",
+      "description": "Configurar dominio en la organización de Azure",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Revisión de arquitectura planteada",
+      "description": "Revisión de arquitectura planteada",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Implementar sistema de autenticación en Aplicación Movil",
+      "description": "Implementar sistema de autenticación en Aplicación Movil",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Permitir iniciar sesión con los Google/Microsoft",
+      "description": "Permitir iniciar sesión con los Google/Microsoft",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Implementar sistema de autenticación de Aplicación Web",
+      "description": "Implementar sistema de autenticación de Aplicación Web",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Definir operaciones de API",
+      "description": "Definir operaciones de API",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Crear pantalla de administración de usuario",
+      "description": "<div>Esto implica diseño de información a mostrar </div>",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Definición y diseño de las pantallas que vamos a tener",
+      "description": "Definición y diseño de las pantallas que vamos a tener",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Mes 1 - Plantilla desarrollo negocio",
+      "description": "Mes 1 - Plantilla desarrollo negocio",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Semana 1 - Visión & Problema",
+      "description": "Semana 1 - Visión & Problema",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Semana 2 - Nicho/cliente",
+      "description": "Semana 2 - Nicho/cliente",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Semana 3 - Competidores",
+      "description": "Semana 3 - Competidores",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Semana 4 - Análisis de competidores",
+      "description": "Semana 4 - Análisis de competidores",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Estatutos iniciales",
+      "description": "Estatutos iniciales",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Definición de arquitectura - Creación de documento y diagrama",
+      "description": "Definición de arquitectura - Creación de documento y diagrama",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Crear diagrama E-R",
+      "description": "Crear diagrama E-R",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Arrancar web",
+      "description": "Arrancar web",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Puesta en marcha del Proyecto",
+      "description": "Puesta en marcha del Proyecto",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Arrrancar APP Movil",
+      "description": "Arrrancar APP Movil",
+      "path": "Desarrollo"
+    },
+    {
+      "State": "New",
+      "type": "User Story",
+      "title": "Modificar Pipeline de Terraform ",
+      "description": "Modificar pipeline de terraform para que se ejecute automaticamente al crear una Pull Request en la rama principal.",
+      "path": "Desarrollo"
+    }
+  
+]

@@ -76,8 +76,3 @@ release_pipelines = [{
   rp_repository_name = "value"
 }]
 
-general_info = {
-  org_name     = "value"
-  project_name = "value"
-  pat          = "value"
-}
