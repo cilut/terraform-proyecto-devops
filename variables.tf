@@ -2,26 +2,6 @@ variable "general" {
   type = map(string)
 
 }
-variable "azdo_org_service_url" {
-  type = string
-}
-
-variable "azdo_personal_access_token" {
-  type      = string
-  default   = ""
-  sensitive = true
-}
-
-variable "project_name" {
-  type    = string
-  default = ""
-}
-
-variable "organization_name" {
-  type    = string
-  default = ""
-}
-
 variable "connection_service" {
   type = list(object({
     p_service_endpoint_name     = string

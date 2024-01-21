@@ -6,6 +6,8 @@ param(
 
 # Comprueba si el módulo Az está instalado
 if (!(Get-Module -ListAvailable -Name Az)) {
+    Write-Output "Command to update PowerShellGet"
+    Install-Module -Name PowerShellGet -Force
     Write-Output "El módulo Az no está instalado. Instalándolo ahora..."
     Install-Module -Name Az -Scope CurrentUser -Force
     Import-Module Az
